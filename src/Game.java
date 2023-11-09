@@ -82,9 +82,7 @@ public class Game {
             System.out.println("|");
         }
     }
-    public static void wrong(){
 
-    }
 
     public static void startgame (String secret_word){
         int secret_word_len = secret_word.length(); // len of the word
