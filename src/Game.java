@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class Game {
     static Scanner scanner = new Scanner(System.in);
-    static String Word = "hello";
+    static String Word = RandomWordFromFile.getRandomWordFromFile();
 
     public static void endgame(boolean end){
         if (end){
             System.out.println("Good Job!");
         } else {
-            hang(0);
+            System.out.println("Secret word was: " + Word);
             System.out.println("Try better next time D:");
         }
     }
@@ -91,6 +91,7 @@ public class Game {
         boolean end = false;
         int attempts = 4;
         while (attempts != 0){
+            System.out.println("_____________________");
             if (star_word.equals(secret_word)){
                 end = true;
                 break;
