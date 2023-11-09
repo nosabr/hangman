@@ -9,8 +9,8 @@ public class Game {
         if (end){
             System.out.println("Good Job!");
         } else {
+            hang(0);
             System.out.println("Try better next time D:");
-            menu();
         }
     }
     public static boolean check(char letter, String secret_word){
@@ -40,7 +40,48 @@ public class Game {
         }
         return updated_star_word.toString();
     }
-
+    public static void hang(int attempts){
+        if (attempts == 4){
+            System.out.println("_____");
+            System.out.println("|/  ");
+            System.out.println("|   ");
+            System.out.println("|  ");
+            System.out.println("|   ");
+            System.out.println("|");
+        }
+        if (attempts == 3){
+            System.out.println("_____");
+            System.out.println("|/  |");
+            System.out.println("|   ");
+            System.out.println("|  ");
+            System.out.println("|   ");
+            System.out.println("|");
+        }
+        if (attempts == 2){
+            System.out.println("_____");
+            System.out.println("|/  |");
+            System.out.println("|   O");
+            System.out.println("|  ");
+            System.out.println("|   ");
+            System.out.println("|");
+        }
+        if (attempts == 1){
+            System.out.println("_____");
+            System.out.println("|/  |");
+            System.out.println("|   O");
+            System.out.println("|  /||");
+            System.out.println("|   ");
+            System.out.println("|");
+        }
+        if (attempts == 0){
+            System.out.println("_____");
+            System.out.println("|/  |");
+            System.out.println("|   O");
+            System.out.println("|  /||");
+            System.out.println("|   |");
+            System.out.println("|");
+        }
+    }
     public static void wrong(){
 
     }
@@ -48,10 +89,13 @@ public class Game {
     public static void startgame (String secret_word){
         int secret_word_len = secret_word.length(); // len of the word
         String star_word = "*".repeat(secret_word_len); // word with ***
+        hang(4);
+        boolean end = false;
         int attempts = 4;
         while (attempts != 0){
             if (star_word.equals(secret_word)){
-                endgame(true);
+                end = true;
+                break;
             }
             System.out.println("Secret word: " + star_word);
             System.out.println("You got " + attempts + " attempts.");
@@ -62,18 +106,17 @@ public class Game {
                 // zapusk right string function
             } else {
                 attempts -= 1;
-                // wrong
+                hang(attempts);
             }
         }
-        endgame(false);
-
+        endgame(end);
     }
     public static void menu() {
         System.out.print("Start new game? :[Y/N] " );
         String conf = scanner.next();
-
         if (Objects.equals(conf, "Y") | Objects.equals(conf, "y")) startgame(Word);
-
+        else return;
         System.out.println("Thanks for playing!");
+        menu();
     }
 }
